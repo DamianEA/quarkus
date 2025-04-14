@@ -6,6 +6,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -35,11 +36,17 @@ public legosInfo(legoService legos) { // <-- Constructor e inicializador legoiSe
         return mesege;
     }
 
+
+
+
     @GET
     @Produces(MediaType.APPLICATION_JSON) // <-- tipo de respuesta que se espera, en este caso json
     public List<legos> listLegos() {
         return legos.getLegos(); // <-- returning the list of legos
     }
+
+
+
 
     @GET
     @Path("/expensive") // <-- ruta de la api, en este caso /legos/maxPrecio
@@ -54,6 +61,16 @@ public legosInfo(legoService legos) { // <-- Constructor e inicializador legoiSe
         }
 
     }
+
+    @GET
+    @Path("/{name}") // <-- ruta de la api, en este caso /legos/{name}
+    @Produces(MediaType.APPLICATION_JSON) // <-- tipo de respuesta que se espera, en este caso json
+    public legos getLegos(@PathParam ("name") String name) throws falla { // <-- returning the list of legos by id
+        return legos.getLegos(name).
+        orElseThrow(() -> 
+        new falla("no hay nd"));// <-- buscando el lego por id
+    }
+
 /* 
 @GET   
 @Produces(MediaType.APPLICATION_JSON) 
