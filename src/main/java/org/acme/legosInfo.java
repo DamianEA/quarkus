@@ -45,7 +45,14 @@ public legosInfo(legoService legos) { // <-- Constructor e inicializador legoiSe
     @Path("/expensive") // <-- ruta de la api, en este caso /legos/maxPrecio
     @Produces(MediaType.APPLICATION_JSON) // <-- tipo de respuesta que se espera, en este caso json
     public Response maxPrecio() {
-        return legos.maxPrecio(); // <-- returning the maximum price of legos
+        
+        if (legos.isEmpty()) { // <-- checking if the list is empty
+            return Response.status(404).entity("No hay precios legos en la lista").build(); // <-- returning a 404 response if the list is empty
+        } else {
+            int precios = legos.maxPrecio();
+            return Response.ok(precios).build(); // <-- returning the maximum price of legos
+        }
+
     }
 /* 
 @GET   

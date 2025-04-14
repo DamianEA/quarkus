@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.ws.rs.core.Response;
+
 
 
 @ApplicationScoped // <-- indica que esta clase es un servicio de aplicacion, y se mantendra viva durante toda la vida de la aplicacion
@@ -20,14 +20,17 @@ public List<legos> getLegos() {
         return Collections.unmodifiableList(valores); // <-- returning the list of legos
     }
 
-public Response maxPrecio(){
-
-        if (valores.isEmpty()) { // <-- checking if the list is empty
-            return Response.status(404).entity("No hay precios legos en la lista").build(); // <-- returning a 404 response if the list is empty
-        }
-        else{
-            int precios = legos.maxPrecio();
-            return Response.ok(precios).build(); // <-- returning the maximum price of legos
-        }
+public boolean isEmpty() { // <-- checking if the list is empty
+        return valores.isEmpty(); // <-- returning true if the list is empty
     }
-}   
+public int maxPrecio(){
+        int max = 0; // <-- variable para guardar el precio maximo
+        for (legos legos : valores) { // <-- recorriendo la lista de legos
+            if (legos.getPrecio() > max) { // <-- si el precio del lego es mayor que el maximo
+                max = legos.getPrecio(); // <-- guardamos el precio en la variable max
+            }
+        }
+        return max; // <-- devolvemos el precio maximo
+}
+}
+    

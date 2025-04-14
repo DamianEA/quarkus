@@ -1,5 +1,5 @@
 package org.acme;
-import java.util.Objects;             //  <-- import dependencias y librerias necesarias
+import java.util.Objects;            //  <-- import dependencias y librerias necesarias
 ////////////////////////////////////////////////////////////////////////////////////////////////
 public class legos { //<-- clase en que declaramos las variables
     private String name;
@@ -8,7 +8,7 @@ public class legos { //<-- clase en que declaramos las variables
     private int year;
 ////////////////////////////////////////////////////////////////////////////////////////////////
     //constructor de la clase legos, donde inicializamos las variables
-    public legos (String name, String depa, float precio, int year) {
+    public legos (String name, String depa, int precio, int year) {
         this.name = name;
         this.depa = depa;
         this.precio = precio;
@@ -30,10 +30,10 @@ public class legos { //<-- clase en que declaramos las variables
         this.depa = depa;
     }
 
-    public float getPrecio() {
-        return this.precio;
+    public int getPrecio() {
+        return (int) this.precio;
     }
-    public void setPrecio(float precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
 
